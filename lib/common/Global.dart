@@ -4,6 +4,9 @@ import 'package:flutter_github_client/models/cacheConfig.dart';
 import 'package:flutter_github_client/models/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'CacheObject.dart';
+import 'Git.dart';
+
 //五套可选主题色
 const _themes = <MaterialColor>[
   Colors.blue,
@@ -16,6 +19,7 @@ const _themes = <MaterialColor>[
 class Global {
   static late SharedPreferences _prefs;
   static Profile profile = Profile();
+
   // 网络缓存对象
   static NetCache netCache = NetCache();
 
@@ -36,9 +40,9 @@ class Global {
       } catch (e) {
         print(e);
       }
-    }else{
+    } else {
       // 默认主题索引为0，代表蓝色
-      profile= Profile()..theme=0;
+      profile = Profile()..theme = 0;
     }
 
     // 如果没有缓存策略，设置默认缓存策略
