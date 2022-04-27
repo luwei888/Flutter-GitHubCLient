@@ -1,7 +1,5 @@
 import 'dart:collection' show LinkedHashMap;
-
 import 'package:dio/dio.dart';
-
 import 'Global.dart';
 
 class CacheObject {

@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_github_client/routes/HomeRoute.dart';
+import 'package:flutter_github_client/routes/LanguageRoute.dart';
+import 'package:flutter_github_client/routes/LoginRoute.dart';
+import 'package:flutter_github_client/routes/ThemeChangeRoute.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 import 'common/Global.dart';
+import 'common/GmLocalizations.dart';
+import 'common/GmLocalizationsDelegate.dart';
 import 'models/share_models/LocaleModel.dart';
 import 'models/share_models/ThemeModel.dart';
 import 'models/share_models/UserModel.dart';
@@ -20,20 +27,20 @@ class MyApp extends StatelessWidget {
         builder: (BuildContext context, themeModel, localeModel, child) {
           return MaterialApp(
             theme: ThemeData(
-              primarySwatch: themeModel.theme,
+              primarySwatch: themeModel.theme as MaterialColor,
             ),
             onGenerateTitle: (context){
-              return GmLocalizations.of(context).title;
+              return GmLocalizations.of(context)!.title;
             },
             home: HomeRoute(),
             locale: localeModel.getLocale(),
             //我们只支持美国英语和中文简体
-            supportedLocales: [
-              const Locale('en', 'US'), // 美国英语
-              const Locale('zh', 'CN'), // 中文简体
+            supportedLocales: const [
+              Locale('en', 'US'), // 美国英语
+              Locale('zh', 'CN'), // 中文简体
               //其它Locales
             ],
-            localizationsDelegates: [
+            localizationsDelegates: const [
               // 本地化的代理类
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
@@ -50,7 +57,7 @@ class MyApp extends StatelessWidget {
                   locale= _locale!;
                 } else {
                   //如果系统语言不是中文简体或美国英语，则默认使用美国英语
-                  locale= Locale('en', 'US');
+                  locale= const Locale('en', 'US');
                 }
                 return locale;
               }

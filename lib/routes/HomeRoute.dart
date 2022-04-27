@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_github_client/common/Git.dart';
+import 'package:flutter_github_client/common/GmLocalizations.dart';
 import 'package:flutter_github_client/models/index.dart';
 import 'package:flutter_github_client/models/share_models/UserModel.dart';
+import 'package:flutter_github_client/widgets/MyDrawer.dart';
+import 'package:flutter_github_client/widgets/RepoItem.dart';
 import 'package:provider/provider.dart';
 
 class HomeRoute extends StatefulWidget {
@@ -21,10 +24,10 @@ class _HomeRouteState extends State<HomeRoute> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(GmLocalizations.of(context).home),
+        title: Text(GmLocalizations.of(context)!.title),
       ),
       body: _buildBody(),
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
     );
   }
 
@@ -34,7 +37,7 @@ class _HomeRouteState extends State<HomeRoute> {
       //用户未登录，显示登录按钮
       return Center(
         child: ElevatedButton(
-          child: Text(GmLocalizations.of(context).login),
+          child: Text(GmLocalizations.of(context)!.login),
           onPressed: () => Navigator.of(context).pushNamed("login"),
         ),
       );
@@ -67,6 +70,8 @@ class _HomeRouteState extends State<HomeRoute> {
                 );
               }
             }
+            //显示单词列表项
+            return RepoItem(_items[index]);
           },
           separatorBuilder: (context, index) => const Divider(height: .0),
           itemCount: _items.length);
